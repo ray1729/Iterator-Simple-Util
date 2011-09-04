@@ -124,6 +124,18 @@ note "Testing imaxstr and iminstr";
     is iminstr( \@STRS ), 'bar', 'iminstr';
 }   
 
+note "Testing imaxstr_by and iminstr_by";
+
+{
+    const my @STRS => qw( foo bar baz quux );
+
+    ok my $max = imaxstr_by { join '', reverse split // } iter \@STRS;
+    is $max, 'baz', 'imaxstr_by';
+
+    ok my $min = iminstr_by { join '', reverse split // } iter \@STRS;
+    is $min, 'foo', 'iminstr_by';
+}
+
 note "Testing iany";
 
 ok iany { $_ > 2 } iter [0..10];

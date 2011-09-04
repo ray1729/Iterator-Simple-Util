@@ -146,26 +146,18 @@ sub imax_by (&$) {
     my ( $code, $iter ) = @_;
 
     _ensure_coderef( $code );
-
-    my $apply_code = sub {
-        $_ = shift;
-        $code->();
-    };
+    $code = _wrap_code( $code );
         
-    ireduce { $apply_code->($a) > $apply_code->($b) ? $a : $b } iter $iter;    
+    ireduce { $code->($a) > $code->($b) ? $a : $b } iter $iter;    
 }
 
 sub imin_by (&$) {
     my ( $code, $iter ) = @_;
     
     _ensure_coderef( $code );
-
-    my $apply_code = sub {
-        $_ = shift;
-        $code->();
-    };
+    $code = _wrap_code( $code );
     
-    ireduce { $apply_code->($a) < $apply_code->($b) ? $a : $b } iter $iter;
+    ireduce { $code->($a) < $code->($b) ? $a : $b } iter $iter;
 }
 
 sub imaxstr ($) {
@@ -180,6 +172,8 @@ sub imaxstr_by (&$) {
     my ( $code, $iter ) = @_;
 
     _ensure_coderef( $code );
+    $code = _wrap_code( $code );
+    
     ireduce { $code->($a) gt $code->($b) ? $a : $b } iter $iter;
 }
 
@@ -187,6 +181,8 @@ sub iminstr_by (&$) {
     my ( $code, $iter ) = @_;
 
     _ensure_coderef( $code );
+    $code = _wrap_code( $code );
+    
     ireduce { $code->($a) lt $code->($b) ? $a : $b } iter $iter;
 }
 
@@ -317,6 +313,15 @@ sub _ensure_coderef {
         require Carp;
         Carp::croak("Not a subroutine reference");
     }
+}
+
+sub _wrap_code {
+    my $code = shift;
+
+    return sub {
+        $_ = shift;
+        $code->();
+    };
 }
 
 1;
