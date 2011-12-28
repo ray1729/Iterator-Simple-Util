@@ -9,6 +9,7 @@ use Sub::Exporter -setup => {
                      iany inone inotall
                      ifirstval ilastval
                      ibefore ibefore_incl iafter iafter_incl
+                     inatatime
                )
              ]
 };
@@ -306,6 +307,23 @@ sub iafter_incl (&$) {
     }
 
     return ichain iter( [$_] ), $iter;
+}
+
+sub inatatime ($;$) {
+    my ($kicks, $iter) = @_;
+
+    $iter = iter $iter;
+
+    return iterator {
+        my @vals;
+
+        for (1 .. $kicks) {
+            my $val = $iter->next;
+            last unless defined $val;
+            push @vals, $val;
+        }
+        return @vals ? \@vals : undef;
+    };
 }
 
 sub _ensure_coderef {
