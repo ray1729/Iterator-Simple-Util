@@ -13,7 +13,8 @@ BEGIN {
                 imax imin imaxstr iminstr imax_by imin_by imaxstr_by iminstr_by
                 iany inone inotall
                 ifirstval ilastval
-                ibefore ibefore_incl iafter iafter_incl )
+                ibefore ibefore_incl iafter iafter_incl
+                inatatime )
         );
 }
 
@@ -193,6 +194,11 @@ note "Testing iafter_incl";
     is_deeply $it->to_array, [3..10];
 }
 
+note "Testing inatatime";
+{
+    ok my $it = inatatime 3, iter [0..10];
+    isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
+    is_deeply $it->to_array, [ [0..2], [3..5], [6..8], [9,10] ];
+}
 
-    
 done_testing();
