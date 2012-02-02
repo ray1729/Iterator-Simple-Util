@@ -5,7 +5,7 @@ use warnings FATAL => 'all';
 
 use Test::Most;
 use Const::Fast;
-use Iterator::Simple qw( iter );
+use Iterator::Simple qw( iter list );
 
 BEGIN {
     use_ok( 'Iterator::Simple::Util',
@@ -16,21 +16,6 @@ BEGIN {
                 ibefore ibefore_incl iafter iafter_incl
                 inatatime )
         );
-}
-
-{
-    package Iterator::Simple::Iterator;
-
-    sub to_array {
-        my $it = shift;
-
-        my @array;
-        while( defined( $_ = $it->next ) ) {
-            push @array, $_;
-        }
-
-        return \@array;
-    }
 }
 
 note "Testing igroup";
@@ -170,35 +155,35 @@ note "Testing ibefore";
 {
     ok my $it = ibefore { $_ > 2 } iter [0..10];
     isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
-    is_deeply $it->to_array, [0,1,2];    
+    is_deeply list($it), [0,1,2];    
 }
 
 note "Testing ibefore_incl";
 {
     ok my $it = ibefore_incl { $_ > 2 } iter [0..10];
     isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
-    is_deeply $it->to_array, [0,1,2,3];
+    is_deeply list($it), [0,1,2,3];
 }
 
 note "Testing iafter";
 {
     ok my $it = iafter { $_ > 2 } iter [0..10];
     isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
-    is_deeply $it->to_array, [4..10];
+    is_deeply list($it), [4..10];
 }
 
 note "Testing iafter_incl";
 {
     ok my $it = iafter_incl { $_ > 2 } iter [0..10];
     isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
-    is_deeply $it->to_array, [3..10];
+    is_deeply list($it), [3..10];
 }
 
 note "Testing inatatime";
 {
     ok my $it = inatatime 3, iter [0..10];
     isa_ok $it, Iterator::Simple->ITERATOR_CLASS;
-    is_deeply $it->to_array, [ [0..2], [3..5], [6..8], [9,10] ];
+    is_deeply list($it), [ [0..2], [3..5], [6..8], [9,10] ];
 }
 
 done_testing();
