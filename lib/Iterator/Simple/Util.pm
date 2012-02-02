@@ -189,8 +189,6 @@ sub isum ($;$) {
         ( $init_val, $iter ) = @_;
     }
 
-    $iter = iter $iter;
-
     ireduce { $a + $b } $init_val, $iter;
 }
 
@@ -204,7 +202,7 @@ values. Retruns C<undef> if the iterator is empty.
 =cut
 
 sub imax ($) {
-    ireduce { $a > $b ? $a : $b } iter( shift );
+    ireduce { $a > $b ? $a : $b } shift;
 }
 
 =pod
@@ -217,7 +215,7 @@ values. Returns C<undef> if the iterator is empty.
 =cut
 
 sub imin ($) {
-    ireduce { $a < $b ? $a : $b } iter( shift );
+    ireduce { $a < $b ? $a : $b } shift;
 }
 
 =pod
@@ -239,7 +237,7 @@ sub imax_by (&$) {
     _ensure_coderef( $code );
     $code = _wrap_code( $code );
         
-    ireduce { $code->($a) > $code->($b) ? $a : $b } iter $iter;    
+    ireduce { $code->($a) > $code->($b) ? $a : $b } $iter;
 }
 
 =pod
@@ -257,7 +255,7 @@ sub imin_by (&$) {
     _ensure_coderef( $code );
     $code = _wrap_code( $code );
     
-    ireduce { $code->($a) < $code->($b) ? $a : $b } iter $iter;
+    ireduce { $code->($a) < $code->($b) ? $a : $b } $iter;
 }
 
 =pod
@@ -269,7 +267,7 @@ Similar to B<imax>, but expects I<ITERABLE> to return string values.
 =cut
 
 sub imaxstr ($) {
-    ireduce { $a gt $b ? $a : $b } iter( shift );
+    ireduce { $a gt $b ? $a : $b } shift;
 }
 
 =pod
@@ -281,7 +279,7 @@ Similar to B<imin>, but expects I<ITERABLE> to return string values.
 =cut
 
 sub iminstr ($) {
-    ireduce { $a lt $b ? $a : $b } iter( shift );
+    ireduce { $a lt $b ? $a : $b } shift;
 }
 
 =pod
@@ -298,7 +296,7 @@ sub imaxstr_by (&$) {
     _ensure_coderef( $code );
     $code = _wrap_code( $code );
     
-    ireduce { $code->($a) gt $code->($b) ? $a : $b } iter $iter;
+    ireduce { $code->($a) gt $code->($b) ? $a : $b } $iter;
 }
 
 =pod
@@ -315,7 +313,7 @@ sub iminstr_by (&$) {
     _ensure_coderef( $code );
     $code = _wrap_code( $code );
     
-    ireduce { $code->($a) lt $code->($b) ? $a : $b } iter $iter;
+    ireduce { $code->($a) lt $code->($b) ? $a : $b } $iter;
 }
 
 =pod
