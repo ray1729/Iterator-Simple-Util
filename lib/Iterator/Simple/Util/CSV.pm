@@ -1,5 +1,7 @@
 package Iterator::Simple::Util::CSV;
 
+# ABSTRACT: Utility to iterate over CSV data
+
 use strict;
 use warnings FATAL => 'all';
 
