@@ -1,0 +1,10 @@
+Changes
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+lib/Iterator/Simple/Util.pm
+t/00-compile.t
+t/iterator-simple-util.t
+t/release-no-smart-comments.t
