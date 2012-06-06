@@ -1,5 +1,7 @@
 package Iterator::Simple::Util;
 
+# ABSTRACT: Port of List::Util and List::MoreUtils to Iterator::Simple
+
 use strict;
 use warnings FATAL => 'all';
 
