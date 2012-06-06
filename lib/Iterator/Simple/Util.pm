@@ -525,7 +525,7 @@ sub iafter (&$) {
 
 =pod
 
-=item iafter_incl I<BLOCK>_I<ITERABLE>
+=item iafter_incl I<BLOCK> I<ITERABLE>
 
 Returns an iterator that will produce all values of I<ITERABLE> after
 (and including) the point where I<BLOCK> returns a true value. Sets
@@ -553,7 +553,7 @@ sub iafter_incl (&$) {
 =item inatatime I<KICKS> I<ITERABLE>
 
 Creates an array iterator that returns array refs of elements from
-I<ITERABLE, I<KICKS> items at a time. For example:
+I<ITERABLE>, I<KICKS> items at a time. For example:
 
     my $it = inatatime 3, iter( [ 'a' .. 'g' ] );
     while( my $vals = $it->next ) {
