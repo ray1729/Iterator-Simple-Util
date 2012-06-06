@@ -8,8 +8,6 @@ use File::Temp;
 use List::MoreUtils qw( zip );
 use Iterator::Simple::Util::CSV qw( icsv );
 
-use Data::Dump 'dd';
-
 my $test_data = File::Temp->new();
 $test_data->print(<<'EOT');
 "Name","Address","Floors","Donated last year","Contact"
