@@ -3,7 +3,7 @@ NAME
     Iterator::Simple
 
 VERSION
-    version 0.001
+    version 0.002
 
 SYNOPSIS
         use Iterator::Simple::Util qw(  igroup ireduce isum
@@ -142,7 +142,7 @@ EXPORTS
 
             $it = iafter { $_ % 5 == 0 } [1..9];    # $it returns 6, 7, 8, 9
 
-    iafter_incl *BLOCK*_*ITERABLE*
+    iafter_incl *BLOCK* *ITERABLE*
         Returns an iterator that will produce all values of *ITERABLE* after
         (and including) the point where *BLOCK* returns a true value. Sets
         $_ for each element in turn.
@@ -151,7 +151,7 @@ EXPORTS
 
     inatatime *KICKS* *ITERABLE*
         Creates an array iterator that returns array refs of elements from
-        *ITERABLE, *KICKS* items at a time. For example:*
+        *ITERABLE*, *KICKS* items at a time. For example:
 
             my $it = inatatime 3, iter( [ 'a' .. 'g' ] );
             while( my $vals = $it->next ) {
@@ -172,11 +172,4 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
-
-POD ERRORS
-    Hey! The above document had some coding errors, which are explained
-    below:
-
-    Around line 529:
-        Unterminated I<...> sequence
 

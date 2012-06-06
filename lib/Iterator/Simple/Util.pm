@@ -1,6 +1,6 @@
 package Iterator::Simple::Util;
 {
-  $Iterator::Simple::Util::VERSION = '0.001';
+  $Iterator::Simple::Util::VERSION = '0.002';
 }
 
 # ABSTRACT: Port of List::Util and List::MoreUtils to Iterator::Simple
@@ -352,7 +352,7 @@ Iterator::Simple::Util - Port of List::Util and List::MoreUtils to Iterator::Sim
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
@@ -516,7 +516,7 @@ value. Sets C<$_> for each element in turn.
 
     $it = iafter { $_ % 5 == 0 } [1..9];    # $it returns 6, 7, 8, 9
 
-=item iafter_incl I<BLOCK>_I<ITERABLE>
+=item iafter_incl I<BLOCK> I<ITERABLE>
 
 Returns an iterator that will produce all values of I<ITERABLE> after
 (and including) the point where I<BLOCK> returns a true value. Sets
@@ -527,7 +527,7 @@ C<$_> for each element in turn.
 =item inatatime I<KICKS> I<ITERABLE>
 
 Creates an array iterator that returns array refs of elements from
-I<ITERABLE, I<KICKS> items at a time. For example:
+I<ITERABLE>, I<KICKS> items at a time. For example:
 
     my $it = inatatime 3, iter( [ 'a' .. 'g' ] );
     while( my $vals = $it->next ) {

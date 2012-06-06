@@ -14,6 +14,7 @@ my %WriteMakefileArgs = (
   "BUILD_REQUIRES" => {
     "File::Find" => 0,
     "File::Temp" => 0,
+    "List::MoreUtils" => 0,
     "Test::More" => 0,
     "Test::Most" => 0
   },
@@ -28,12 +29,15 @@ my %WriteMakefileArgs = (
     "B" => 0,
     "Carp" => 0,
     "Const::Fast" => 0,
+    "IO::File" => 0,
+    "IO::Handle" => 0,
     "Iterator::Simple" => 0,
     "Sub::Exporter" => 0,
+    "Text::CSV_XS" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.001",
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }
